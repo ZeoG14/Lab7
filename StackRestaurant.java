@@ -15,14 +15,14 @@ public class StackRestaurant extends Restaurant {
 
 	private Order[] orderList;
 	private int topOfStack;
-	private static int SIZE = 10;
+	private int size = 10;
 
     /**
      * Create the stack restaurant. Initializes the Order storage variables.
      */
 	public StackRestaurant()
 	{
-		this.orderList = new Order[SIZE];
+		this.orderList = new Order[getSize()];
 		this.topOfStack = 0;
 		
 		
@@ -32,8 +32,8 @@ public class StackRestaurant extends Restaurant {
      */
 	private void resize()
 	{
-		
-		 Order[] temp = new Order[SIZE * 2];
+		this.setSize(getSize() * 2);
+		 Order[] temp = new Order[this.getSize()];
 		 for (int i = 0; i < orderList.length; ++i)
 		 {
 			 temp[i] = orderList[i];
@@ -55,34 +55,72 @@ public class StackRestaurant extends Restaurant {
 	{
 		//TODO:implement this
 		//resize if necessary and then order to stack
+		if(orderList.length >= getSize())
+		{	
+			resize();
+		}
+		
+		orderList[topOfStack] = order;
+		this.topOfStack++;
+		
+		return true;
 	}
     /**
      * [Internal Code - This is not required by the specification but can be a useful construct.]
-     */
+     *
 	@Override
+	*/
 	protected Order completeOrder()
 	{
 		//TODO: implement this
 		//if no orders return -1
 		//otherwise update topOfStack and return order at topOfStack
+		
+		if(topOfStack == 0)
+		{
+			return orderList[-1];
+		}
+		else
+		{
+			this.topOfStack--;
+			return orderList[topOfStack];
+		}
+		
 	}
     /**
      * Computes the number of orders in the restaurant that have not been completed.
      * 
      * @return the number of orders to complete.
-     */
+     *
 	@Override
+	*/
 	public int numberRemainingOrder()
 	{
-		//TODO: implement this
+		int counter = 0;
+		for(int i = this.topOfStack; i >= 0; --i)
+		{
+			counter++;
+		}
+		return counter; 
 	}
     /**
      * TODO
-     */
+     *
 	@Override
+	*/
 	protected Order checkNextCompletedOrder()
 	{
 		//TODO: return order the next order in line
+		this.topOfStack--;
+		return orderList[topOfStack];
+	}
+	public  int getSize() 
+	{
+		return this.size;
+	}
+	public  void setSize(int sIZE) 
+	{
+		this.size = sIZE;
 	}
 }
 
