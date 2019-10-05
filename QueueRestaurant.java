@@ -21,7 +21,10 @@ public class QueueRestaurant extends Restaurant{
 	
 	public QueueRestaurant(int maxSize)
 	{
-		//TODO: implement this
+		this.orderList = new Order[maxSize];
+		this.head = 0;
+		this.tail = 0;
+		this.numOrders =0;
 	}
     /**
      * Add an order to the restaurant. If there is no more room (number of tickets in the restaurant == maxSize of
@@ -32,19 +35,57 @@ public class QueueRestaurant extends Restaurant{
      */
 	public boolean addOrder(Order order)
 	{
-		//TODO: implement this
+		if(this.numOrders < orderList.length)
+		{
+			//Increment the number of orders
+			this.numOrders++;
+			
+			//inserting the parameter order after the last element.
+			orderList[this.head] = order;
+			
+			//Increment the head to add a new element after it
+			this.head = head++;
+			
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
     /**
      * [Internal Code - This is not required by the specification but can be a useful construct.]
      * 
      */
+	
+	/**
 	@Override
+	*/
 	protected Order completeOrder()
 	{
-		//TODO:implement this
+		
 		//If no orders, return null
+		if(numOrders == 0)
+		{
+			return null;
+		}
 	    //Get first submitted order
+		Order first = orderList[tail];
+		
 		//Update the numOrders and tail and return
+		this.numOrders--;
+		this.tail++;
+		
+		/*Order[] temp = new Order[orderList.length - 1];
+		for(int i = 0, j = tail ; i < orderList.length; i++, j++)
+		{
+			temp[i] = orderList[j];
+		}
+		
+		this.orderList = temp; */
+		
+		return first;
+		
 		
 	}
     /**
@@ -52,19 +93,32 @@ public class QueueRestaurant extends Restaurant{
      * 
      * @return the number of orders to complete.
      */
+	/**
 	@Override
+	*/
 	protected int numberRemainingOrder()
 	{
-		//TODO: implement this
+		
+		return this.numOrders;
 	}
     /**
      * [Internal Code - This is not required by the specification but can be a useful construct.]
      */
+	/**
 	@Override
+	*/
 	protected Order checkNextCompletedOrder()
 	{
-		//TODO: implement this
+		
 		//check that the is at least one order
+		if(head == tail)
+		{
+			return null;
+		}
 		//if yes, return the next order to be completed
+		else
+		{
+			return orderList[this.tail];
+		}
 	}
 }
