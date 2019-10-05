@@ -87,9 +87,10 @@ public abstract class Restaurant
      */
 	public String completeOrder(int timeCompleted)
 	{
+		
 		if(numberRemainingOrder() != 0)
 		{
-			return String.format("It took %d time units to complete the following order: %s", timeCompleted, this.toString()); //Finish Implementing later
+			return String.format("It took %d time units to complete the following order: %s", completeOrder().getTimeOrdered() - timeCompleted, completeOrder().toString()); //Finish Implementing later
 		}
 		else
 		{
