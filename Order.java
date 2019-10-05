@@ -34,7 +34,9 @@ public class Order implements Comparable<Order>
      */
 	public Order(String description, int timeOrdered)
 	{
-		//TODO: implement this constructor 
+		this.description = description;
+		this.timeOrdered = timeOrdered;
+		
 
 	}
 	/**
@@ -42,14 +44,14 @@ public class Order implements Comparable<Order>
 	 */
 	public String getDescription()
 	{
-	    // TODO: implement this.
+	    return this.description;
 	}
 	/**
 	 * @return timeOrdered
 	 */
 	public int getTimeOrdered()
 	{
-	    // TODO: implement this.
+	    return this.timeOrdered;
 	}
 	
 	/**
@@ -59,7 +61,7 @@ public class Order implements Comparable<Order>
 	@Override
 	public String toString()
 	{
-		// TODO: implement this
+		return String.format("Description: %s", getDescription());
 	}
     /**
      * Comparison override. Comparison for Orders sorts the orders in order of when the order
@@ -73,6 +75,21 @@ public class Order implements Comparable<Order>
 	@Override
 	public int compareTo(Order order)
 	{
-		//TODO: implement this
+		int position = 0;
+		if(this.getTimeOrdered() < order.getTimeOrdered())
+		{
+			return -1;
+		}
+		else if(this.getTimeOrdered() == order.getTimeOrdered())
+		{
+			return 0;
+		}
+		else if(this.getTimeOrdered() > order.getTimeOrdered())
+		{
+			return 1;
+		}
+		
+		return position; 
+		
 	}
 }
