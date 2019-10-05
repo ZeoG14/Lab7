@@ -52,7 +52,14 @@ public abstract class Restaurant
      */
 	public String getCurrentStatus()
 	{
-		//TODO: implement this
+		if (numberRemainingOrder() == 0 && checkNextCompletedOrder() == null)
+		{
+			return "No orders left.";
+		}
+		else
+		{
+			return String.format("%d orders left. Working on: %s", numberRemainingOrder(), checkNextCompletedOrder().toString());
+		}
 	}
     /**
      * Completes an order by updating the underlying data structure of the restaurant. Each restaurant uses this
@@ -80,7 +87,15 @@ public abstract class Restaurant
      */
 	public String completeOrder(int timeCompleted)
 	{
-		//TODO: implement this
+		if(numberRemainingOrder() != 0)
+		{
+			return String.format("It took %d time units to complete the following order: %s", timeCompleted, this.toString()); //Finish Implementing later
+		}
+		else
+		{
+			return "No orders remain. Could not complete an Ticket.";
+		}
+		
 	}
 	
 }
