@@ -15,13 +15,16 @@ public class StackRestaurant extends Restaurant {
 
 	private Order[] orderList;
 	private int topOfStack;
+	private static int SIZE = 10;
 
     /**
      * Create the stack restaurant. Initializes the Order storage variables.
      */
 	public StackRestaurant()
 	{
-		//TODO: implement this
+		this.orderList = new Order[SIZE];
+		this.topOfStack = 0;
+		
 		
 	}
     /**
@@ -29,7 +32,14 @@ public class StackRestaurant extends Restaurant {
      */
 	private void resize()
 	{
-		// TODO: double the size
+		
+		 Order[] temp = new Order[SIZE * 2];
+		 for (int i = 0; i < orderList.length; ++i)
+		 {
+			 temp[i] = orderList[i];
+		 }
+		 
+		 this.orderList = temp;
 	}
     /**
      * Add an order to the restaurant.
@@ -38,7 +48,9 @@ public class StackRestaurant extends Restaurant {
      * @return True. Because the StackRestaurant should resize if it runs out of room to store tickets, a ticket
      * should always be added, and this method should always return true.
      */
+	/**
 	@Override
+	*/
 	public boolean addOrder(Order order)
 	{
 		//TODO:implement this
